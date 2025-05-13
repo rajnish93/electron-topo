@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     'pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
+    'nuxt-electron',
   ],
 
   imports: {
@@ -21,6 +22,16 @@ export default defineNuxtConfig({
   css: ['~/assets/scss/app.scss', '~/assets/scss/pv.scss'],
 
   compatibilityDate: '2024-11-01',
+
+  electron: {
+    build: [
+      {
+        // Main-Process entry file of the Electron App.
+        entry: 'electron/main.ts',
+      },
+    ],
+    disableDefaultOptions: true,
+  },
 
   eslint: {
     config: {

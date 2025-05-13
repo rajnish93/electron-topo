@@ -1,5 +1,8 @@
+ignoredBuiltDependencies:
+  - electron-winstaller
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - electron
   - esbuild
   - sharp
   - unrs-resolver
