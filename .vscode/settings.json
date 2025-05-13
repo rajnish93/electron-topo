@@ -1,0 +1,25 @@
+{
+  "cSpell.words": [
+    "commitlint",
+    "iconfield",
+    "inputtext",
+    "Nuxt",
+    "nuxtjs",
+    "persistedstate",
+    "Pinia",
+    "primeuix",
+    "primevue",
+    "radiobutton",
+    "sharkey",
+    "togglebutton"
+  ],
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": true,
+  "[vue]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.formatOnSave": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  }
+}
