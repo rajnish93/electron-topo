@@ -12,6 +12,14 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
     'nuxt-electron',
+    [
+      'nuxt-lodash',
+      {
+        prefix: '_',
+        prefixSkip: false,
+        upperAfterPrefix: false,
+      },
+    ],
   ],
 
   imports: {
