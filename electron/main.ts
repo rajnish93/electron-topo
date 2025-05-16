@@ -24,7 +24,7 @@
 import path from 'path'
 import http from 'http'
 import fs from 'fs'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu, dialog } from 'electron'
 import mime from 'mime-types'
 import getPort from 'get-port'
 
@@ -86,4 +86,92 @@ app.whenReady().then(async () => {
     // In production, load from the local static file server
     win.loadURL(`http://localhost:${PORT}`)
   }
+
+  const isMac = process.platform === 'darwin'
+
+  const template: Array<(Electron.MenuItemConstructorOptions)> = [
+    {
+      label: 'File',
+      submenu: [isMac ? { role: 'close' } : { role: 'quit' }],
+    },
+    {
+      label: 'View',
+      submenu: [
+        { role: 'reload' },
+        { role: 'forceReload' },
+        // { role: 'toggleDevTools' },
+        // { type: 'separator' },
+        // { role: 'resetZoom' },
+        // { role: 'zoomIn' },
+        // { role: 'zoomOut' },
+        // { type: 'separator' },
+        { role: 'togglefullscreen' },
+      ],
+    },
+    {
+      label: 'Window',
+      submenu: [
+        {
+          label: 'Home',
+          click() {
+            if (isDev) {
+              win.loadURL('http://localhost:3000')
+            }
+            else {
+              win.loadURL(`http://localhost:${PORT}`)
+            }
+          },
+        },
+        { role: 'minimize' },
+        // { role: 'zoom' },
+        // ...(isMac
+        //   ? [
+        //       { type: 'separator' },
+        //       { role: 'front' },
+        //       { type: 'separator' },
+        //       { role: 'window' },
+        //     ]
+        //   : [{ role: 'close' }]),
+      ],
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'Documentation',
+          click() {
+            if (isDev) {
+              win.loadURL('http://localhost:3000/documentation')
+            }
+            else {
+              win.loadURL(`http://localhost:${PORT}/documentation/index.html`)
+            }
+          },
+        },
+        {
+          label: 'About',
+          click() {
+            const aboutMessage = `
+    App Name: ${app.getName()}
+    Version: ${app.getVersion()}
+    Electron: ${process.versions.electron}
+    Chromium: ${process.versions.chrome}
+    Node.js: ${process.versions.node}
+    V8: ${process.versions.v8}
+    OS: ${process.platform} ${process.arch}
+  `
+            dialog.showMessageBox(win, {
+              type: 'info',
+              title: 'About',
+              message: aboutMessage,
+              buttons: ['OK'],
+            })
+          },
+        },
+      ],
+    },
+  ]
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
 })
