@@ -1,5 +1,6 @@
 {
   "name": "nuxt-electron",
+  "productName": "My Electron App",
   "private": true,
   "type": "module",
   "main": "dist-electron/main.js",
@@ -68,6 +69,10 @@
   },
   "config": {
     "forge": {
+      "packagerConfig": {
+        "name": "nuxt-electron",
+        "executableName": "nuxt-electron"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-deb",
