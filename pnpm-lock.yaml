@@ -81,12 +81,6 @@ importers:
       '@electron-forge/plugin-auto-unpack-natives':
         specifier: ^7.8.1
         version: 7.8.1
-      '@electron-forge/plugin-fuses':
-        specifier: ^7.8.1
-        version: 7.8.1(@electron/fuses@1.8.0)
-      '@electron/fuses':
-        specifier: ^1.8.0
-        version: 1.8.0
       '@nuxt/eslint':
         specifier: 1.3.0
         version: 1.3.0(@vue/compiler-sfc@3.5.13)(eslint@9.25.1(jiti@2.4.2))(magicast@0.3.5)(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(sass-embedded@1.87.0)(terser@5.39.0)(yaml@2.7.1))
@@ -441,12 +435,6 @@ packages:
     resolution: {integrity: sha512-iCZC2d7CbsZ9l6j5d+KPIiyQx0U1QBfWAbKnnQhWCSizjcrZ7A9V4sMFZeTO6+PVm48b/r9GFPm+slpgZtYQLg==}
     engines: {node: '>= 16.4.0'}
 
-  '@electron-forge/plugin-fuses@7.8.1':
-    resolution: {integrity: sha512-dYTwvbV1HcDOIQ0wTybpdtPq6YoBYXIWBTb7DJuvFu/c/thj1eoEdnbwr8mT9hEivjlu5p4ls46n16P5EtZ0oA==}
-    engines: {node: '>= 16.4.0'}
-    peerDependencies:
-      '@electron/fuses': '>=1.0.0'
-
   '@electron-forge/publisher-base@7.8.1':
     resolution: {integrity: sha512-z2C+C4pcFxyCXIFwXGDcxhU8qtVUPZa3sPL6tH5RuMxJi77768chLw2quDWk2/dfupcSELXcOMYCs7aLysCzeQ==}
     engines: {node: '>= 16.4.0'}
@@ -482,10 +470,6 @@ packages:
   '@electron/asar@3.4.1':
     resolution: {integrity: sha512-i4/rNPRS84t0vSRa2HorerGRXWyF4vThfHesw0dmcWHp+cspK743UanA0suA5Q5y8kzY2y6YKrvbIUn69BCAiA==}
     engines: {node: '>=10.12.0'}
-    hasBin: true
-
-  '@electron/fuses@1.8.0':
-    resolution: {integrity: sha512-zx0EIq78WlY/lBb1uXlziZmDZI4ubcCXIMJ4uGjXzZW0nS19TjSPeXPAjzzTmKQlJUZm0SbmZhPKP7tuQ1SsEw==}
     hasBin: true
 
   '@electron/get@2.0.3':
@@ -7117,15 +7101,6 @@ snapshots:
       - bluebird
       - supports-color
 
-  '@electron-forge/plugin-fuses@7.8.1(@electron/fuses@1.8.0)':
-    dependencies:
-      '@electron-forge/plugin-base': 7.8.1
-      '@electron-forge/shared-types': 7.8.1
-      '@electron/fuses': 1.8.0
-    transitivePeerDependencies:
-      - bluebird
-      - supports-color
-
   '@electron-forge/publisher-base@7.8.1':
     dependencies:
       '@electron-forge/shared-types': 7.8.1
@@ -7200,12 +7175,6 @@ snapshots:
       commander: 5.1.0
       glob: 7.2.3
       minimatch: 3.1.2
-
-  '@electron/fuses@1.8.0':
-    dependencies:
-      chalk: 4.1.2
-      fs-extra: 9.1.0
-      minimist: 1.2.8
 
   '@electron/get@2.0.3':
     dependencies:
