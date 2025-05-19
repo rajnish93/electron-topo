@@ -1,0 +1,33 @@
+name: Release Electron App
+
+on:
+  push:
+    tags:
+      - 'v*'  # This triggers the release when a tag is pushed
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        # You can specify the token if needed
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build and package Electron app
+      run: npm run make
+
+    - name: Publish to GitHub Releases
+      uses: electron-forge-publisher-github@latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Referencing the secret
