@@ -13,7 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # You can specify the token if needed
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
@@ -27,7 +26,27 @@ jobs:
       - name: Build and package Electron app
         run: npm run make
 
-      - name: Publish to GitHub Releases
-        uses: electron-forge-publisher-github@latest
+      - name: Publish to GitHub Releases for Windows (64-bit and 32-bit)
+        run: |
+          # Publishing for 64-bit Windows (exe)
+          npx electron-forge publish --platform=win32 --arch=x64 --publish=always
+          # Publishing for 32-bit Windows (exe)
+          npx electron-forge publish --platform=win32 --arch=ia32 --publish=always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
+
+      - name: Publish to GitHub Releases for Linux (Ubuntu)
+        run: |
+          # Publishing for 64-bit Linux (deb)
+          npx electron-forge publish --platform=linux --arch=x64 --publish=always
+          # Publishing for 32-bit Linux (deb)
+          npx electron-forge publish --platform=linux --arch=ia32 --publish=always
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
+
+      - name: Publish to GitHub Releases for macOS
+        run: |
+          # Publishing for 64-bit macOS (dmg)
+          npx electron-forge publish --platform=darwin --arch=x64 --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret

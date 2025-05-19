@@ -86,12 +86,26 @@
         },
         {
           "name": "@electron-forge/maker-dmg",
+          "platforms": [
+            "darwin"
+          ],
           "config": {
             "background": "public/images/logos/HBD.png",
             "icon": "public/images/logos/HBD.png",
             "format": "ULFO",
             "overwrite": true
           }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": [
+            "win32"
+          ]
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github"
         }
       ]
     }
