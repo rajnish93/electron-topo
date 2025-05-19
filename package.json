@@ -16,6 +16,7 @@
     "lint:fix": "eslint --fix .",
     "make": "pnpm generate && electron-forge make"
   },
+  "license": "MIT",
   "dependencies": {
     "@primeuix/themes": "^1.0.3",
     "@primevue/forms": "^4.3.3",
@@ -105,7 +106,14 @@
       ],
       "publishers": [
         {
-          "name": "@electron-forge/publisher-github"
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "stackvue",
+              "name": "nuxt-electron"
+            },
+            "prerelease": true
+          }
         }
       ]
     }

@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         platform: [win32, darwin, linux] # Define the platforms
-        arch: [x64, ia32] # Define the architectures
+        arch: [x64] # Define the architectures
 
     steps:
       - name: Checkout repository
@@ -37,7 +37,7 @@ jobs:
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update
-          sudo apt install -y wine64 wine32
+          sudo apt install -y wine64 wine32 mono-complete
 
       - name: Generate using pnpm
         run: pnpm generate
