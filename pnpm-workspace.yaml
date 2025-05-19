@@ -2,6 +2,7 @@ ignoredBuiltDependencies:
   - electron-winstaller
 onlyBuiltDependencies:
   - '@parcel/watcher'
+  - core-js
   - electron
   - esbuild
   - sharp
