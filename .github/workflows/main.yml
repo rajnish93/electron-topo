@@ -33,7 +33,7 @@ jobs:
         run: pnpm install # Use pnpm to install dependencies
 
       - name: Install Wine (for Windows builds on non-Windows runners)
-        if: matrix.platform != 'win32'
+        if: matrix.platform == 'win32'
         run: |
           sudo dpkg --add-architecture i386
           sudo apt update
