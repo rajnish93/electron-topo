@@ -10,6 +10,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [win32, darwin, linux] # Define the platforms
+        arch: [x64, ia32] # Define the architectures
 
     steps:
       - name: Checkout repository
@@ -28,30 +32,22 @@ jobs:
       - name: Install dependencies using pnpm
         run: pnpm install # Use pnpm to install dependencies
 
-      - name: Build and package Electron app
-        run: pnpm make # Use pnpm to run the make script
-
-      - name: Publish to GitHub Releases for Windows (64-bit and 32-bit)
+      - name: Install Wine (for Windows builds on non-Windows runners)
+        if: matrix.platform != 'win32'
         run: |
-          # Publishing for 64-bit Windows (exe)
-          pnpx electron-forge publish --platform=win32 --arch=x64 --publish=always
-          # Publishing for 32-bit Windows (exe)
-          pnpx electron-forge publish --platform=win32 --arch=ia32 --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt install -y wine64 wine32
 
-      - name: Publish to GitHub Releases for Linux (Ubuntu)
-        run: |
-          # Publishing for 64-bit Linux (deb)
-          pnpx electron-forge publish --platform=linux --arch=x64 --publish=always
-          # Publishing for 32-bit Linux (deb)
-          pnpx electron-forge publish --platform=linux --arch=ia32 --publish=always
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
+      - name: Generate using pnpm
+        run: pnpm generate
 
-      - name: Publish to GitHub Releases for macOS
+      # - name: Build and package Electron app for ${{ matrix.platform }}-${{ matrix.arch }}
+      #   run: |
+      #     pnpx electron-forge make -- --platform=${{ matrix.platform }} --arch=${{ matrix.arch }}
+
+      - name: Publish to GitHub Releases
         run: |
-          # Publishing for 64-bit macOS (dmg)
-          pnpx electron-forge publish --platform=darwin --arch=x64 --publish=always
+          pnpx electron-forge publish --platform=${{ matrix.platform }} --arch=${{ matrix.arch }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
