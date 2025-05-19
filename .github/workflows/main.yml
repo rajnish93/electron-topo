@@ -22,33 +22,36 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install pnpm
+        run: npm install -g pnpm # Install pnpm globally
+
+      - name: Install dependencies using pnpm
+        run: pnpm install # Use pnpm to install dependencies
 
       - name: Build and package Electron app
-        run: npm run make
+        run: pnpm make # Use pnpm to run the make script
 
       - name: Publish to GitHub Releases for Windows (64-bit and 32-bit)
         run: |
           # Publishing for 64-bit Windows (exe)
-          npx electron-forge publish --platform=win32 --arch=x64 --publish=always
+          pnpx electron-forge publish --platform=win32 --arch=x64 --publish=always
           # Publishing for 32-bit Windows (exe)
-          npx electron-forge publish --platform=win32 --arch=ia32 --publish=always
+          pnpx electron-forge publish --platform=win32 --arch=ia32 --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
 
       - name: Publish to GitHub Releases for Linux (Ubuntu)
         run: |
           # Publishing for 64-bit Linux (deb)
-          npx electron-forge publish --platform=linux --arch=x64 --publish=always
+          pnpx electron-forge publish --platform=linux --arch=x64 --publish=always
           # Publishing for 32-bit Linux (deb)
-          npx electron-forge publish --platform=linux --arch=ia32 --publish=always
+          pnpx electron-forge publish --platform=linux --arch=ia32 --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
 
       - name: Publish to GitHub Releases for macOS
         run: |
           # Publishing for 64-bit macOS (dmg)
-          npx electron-forge publish --platform=darwin --arch=x64 --publish=always
+          pnpx electron-forge publish --platform=darwin --arch=x64 --publish=always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Referencing the secret
