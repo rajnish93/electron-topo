@@ -16,6 +16,10 @@
     "lint:fix": "eslint --fix .",
     "make": "pnpm generate && electron-forge make"
   },
+  "author": {
+    "name": "Rajnish Singh",
+    "email": "rajnish@reluminos.com"
+  },
   "license": "MIT",
   "dependencies": {
     "@primeuix/themes": "^1.0.3",
@@ -108,7 +112,7 @@
         {
           "name": "@electron-forge/publisher-github",
           "config": {
-            "repository": {
+            "github_repository": {
               "owner": "stackvue",
               "name": "nuxt-electron"
             },
