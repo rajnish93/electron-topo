@@ -74,6 +74,7 @@
   "config": {
     "forge": {
       "packagerConfig": {
+        "asar": true,
         "name": "nuxt-electron",
         "executableName": "nuxt-electron"
       },
@@ -113,10 +114,11 @@
           "name": "@electron-forge/publisher-github",
           "config": {
             "github_repository": {
-              "owner": "stackvue",
-              "name": "nuxt-electron"
+              "owner": "rajnish93",
+              "name": "electron-topo"
             },
-            "prerelease": true
+            "draft": false,
+            "prerelease": false
           }
         }
       ]
