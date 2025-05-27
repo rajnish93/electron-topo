@@ -20,15 +20,15 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Generate output
-        run: pnpm generate
+        run: npm generate
 
       - name: Make and Publish Linux Build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: pnpx electron-forge publish
+        run: npx electron-forge publish
 
   build-windows:
     runs-on: windows-latest
@@ -42,15 +42,15 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Generate output
-        run: pnpm generate
+        run: npm generate
 
       - name: Make and Publish Windows Build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: pnpx electron-forge publish
+        run: npx electron-forge publish
 
   build-macos:
     runs-on: macos-latest
@@ -64,12 +64,12 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Generate output
-        run: pnpm generate
+        run: npm generate
 
       - name: Make and Publish macOS Build
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: pnpx electron-forge publish
+        run: npx electron-forge publish
