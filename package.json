@@ -113,7 +113,7 @@
         {
           "name": "@electron-forge/publisher-github",
           "config": {
-            "github_repository": {
+            "repository": {
               "owner": "rajnish93",
               "name": "electron-topo"
             },
